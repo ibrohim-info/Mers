@@ -138,6 +138,17 @@ window.addEventListener("DOMContentLoaded", () => {
   setClock(".timer", deadline);
 
   // CLASS
+
+  const getResource = async (url) => {
+    const res = await fetch(url)
+      if(!res.ok){
+       throw new Error(`Could not fetch {$url}, status: ${res.status}`)
+      }
+    return await res.json()
+  }
+
+
+
   class CarCard {
     constructor(src, alt, title, descr, price, parentSelector, ...classess) {
       this.src = src
@@ -178,39 +189,12 @@ window.addEventListener("DOMContentLoaded", () => {
       this.parent.append(element)
     }
   }
-
-  new CarCard(
-    'img/tabs/1.jpg',
-    'car',
-    '2021 Mercedes-Benz C-Class',
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    '.menu .container',
-    // 'red',
-    // 'black'
-  ).render();
-  new CarCard(
-    'img/tabs/2.jpg',
-    'car',
-    '2021 Mercedes-Benz CLA-Class',
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    '.menu .container'
-  ).render()
-  new CarCard(
-    'img/tabs/3.jpg',
-    'car',
-    '2021 Mercedes-Benz SCLA',
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    '.menu .container'
-  ).render()
+  getResource(' http://localhost:3000/menu')
+    .then(data => {
+      data.forEach(({img, altimg, title, descr, price}) => {
+        new CarCard(img, altimg, title, descr, price,'.menu .container' ).render()
+      })
+    })
 
   // SLIDER FIRST WAY (EASY)
   // const slides = document.querySelectorAll('.offer__slide'),
@@ -387,7 +371,7 @@ window.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // ACCORDION  
+  // ACCORDION
 
   const accordion = document.querySelectorAll('.accordion')
 
@@ -419,17 +403,17 @@ window.addEventListener("DOMContentLoaded", () => {
   })
 
 
-const forms = document.querySelectorAll('form')
+  const forms = document.querySelectorAll('form')
   const message = {
     loading: 'img/form/spinner.svg',
     success: 'Murojatingiz qabul qilindi',
     failure: 'Error'
   }
   forms.forEach(item =>{
-    bindPostData(item)
+    bindpostData(item)
   })
 
-  const postData = async(url, data) => {
+  const postData = async (url,data) =>{
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -437,12 +421,11 @@ const forms = document.querySelectorAll('form')
       },
       body: data
     })
-
     // async await
     return await res.json()
   }
 
-  function bindPostData(form){
+  function bindpostData(form){
     form.addEventListener('submit', (e) =>{
       e.preventDefault()
       const statusMessage = document.createElement('img')
@@ -455,13 +438,13 @@ const forms = document.querySelectorAll('form')
 
       const formData = new FormData(form)
 
-      const json = JSON.stringify()
-      const
+      const json = JSON.stringify(Object.fromEntries(formData.entries()))
 
-    postData(' http://localhost:3000/requests', JSON.stringify(object))
+       postData('  http://localhost:3000/requests', json)
         .then(data => {
           console.log(data)
           showThanksModal(message.success)
+
           statusMessage.remove()
         })
         .catch(() => {
@@ -485,32 +468,31 @@ const forms = document.querySelectorAll('form')
     })
   }
 
-function  showThanksModal(){
+  function  showThanksModal(){
     const prevModalDialog = document.querySelector('.modal__dialog')
 
-  prevModalDialog.classList.add('hide')
-  openModal()
+    prevModalDialog.classList.add('hide')
+    openModal()
 
-  const thanksModal = document.createElement('div')
-  thanksModal.classList.add('modal__dialog')
-  thanksModal.innerHTML = `
+    const thanksModal = document.createElement('div')
+    thanksModal.classList.add('modal__dialog')
+    thanksModal.innerHTML = `
    <div class="modal__content">
     <div class="modal__close" data-close>x</div>
     <div class="modal__title">${message.success}</div>
    </div>
   `
-  document.querySelector('.modal').append(thanksModal)
-  setTimeout(() =>{
-    thanksModal.remove()
-    prevModalDialog.classList.add('show')
-    prevModalDialog.classList.remove('hide')
-    closeModal();
-  }, 4000)
-}
+    document.querySelector('.modal').append(thanksModal)
+    setTimeout(() =>{
+      thanksModal.remove()
+      prevModalDialog.classList.add('show')
+      prevModalDialog.classList.remove('hide')
+      closeModal();
+    }, 4000)
+  }
 
-fetch(' http://localhost:3000/menu')
-  .then(data => data.json())
-  .then(res => console.log(res))
+
 });
 
 // ``
+
