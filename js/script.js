@@ -189,13 +189,18 @@ window.addEventListener("DOMContentLoaded", () => {
       this.parent.append(element)
     }
   }
-  getResource(' http://localhost:3000/menu')
-    .then(data => {
-      data.forEach(({img, altimg, title, descr, price}) => {
-        new CarCard(img, altimg, title, descr, price,'.menu .container' ).render()
+  // getResource(' http://localhost:3000/menu')
+  //   .then(data => {
+  //     data.forEach(({img, altimg, title, descr, price}) => {
+  //       new CarCard(img, altimg, title, descr, price,'.menu .container' ).render()
+  //     })
+  //   })
+     axios.get(' http://localhost:3000/menu')
+       .then(data => {
+       data.forEach(({img, altimg, title, descr, price}) => {
+               new CarCard(img, altimg, title, descr, price,'.menu .container' ).render()
+              })
       })
-    })
-
   // SLIDER FIRST WAY (EASY)
   // const slides = document.querySelectorAll('.offer__slide'),
   //   prev = document.querySelector('.offer__slider-prev'),
