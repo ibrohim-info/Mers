@@ -1,4 +1,4 @@
-function clas() {
+function cards() {
   // CLASS
   const getResource = async (url) => {
     const res = await fetch(url);
@@ -76,4 +76,4 @@ function clas() {
     });
   });
 }
-module.exports = clas;
+module.exports = cards;
