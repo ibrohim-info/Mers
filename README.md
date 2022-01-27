@@ -1,1 +1,5 @@
-# JavaScript.-51-dars.-Accordion
+first way
+## npm install
+
+Second way
+## npx json-server db.json
