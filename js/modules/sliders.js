@@ -1,37 +1,5 @@
 function sliders() {
-  // SLIDER FIRST WAY (EASY)
-  // const slides = document.querySelectorAll('.offer__slide'),
-  //   prev = document.querySelector('.offer__slider-prev'),
-  //   next = document.querySelector('.offer__slider-next'),
-  //   current = document.querySelector('#current'),
-  //   total = document.querySelector('#total');
-
-  // let slideIndex = 1;
-  // show(slideIndex)
-  // function show(s) {
-  //   if(s > slides.length){
-  //     slideIndex = 1
-  //   }
-  //   if(s < 1) {
-  //     slideIndex = slides.length
-  //   }
-  //   slides.forEach(item => item.style.cssText = 'display: none')
-  //   slides[slideIndex - 1].style.display = 'block'
-  //   if(slides.length < 10) {
-  //     current.textContent = `0${slideIndex}`
-  //   }else{
-  //     current.textContent = slideIndex
-  //   }
-  // }
-  // function sliderPlus(s) {
-  //   show(slideIndex += 1)
-  // }
-  // prev.addEventListener('click', () => {
-  //   sliderPlus(-1)
-  // })
-  // next.addEventListener('click', () => {
-  //   sliderPlus(1)
-  // })
+  // SLIDERS
 
   const slides = document.querySelectorAll(".offer__slide"),
     slider = document.querySelector(".offer__slider"),
@@ -69,17 +37,17 @@ function sliders() {
     dots = [];
 
   indicator.style.cssText = `
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 15;
-    display: flex;
-    justify-content: center;
-    margin-right: 15%;
-    margin-left: 15%;
-    list-style: none
-  `;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 15;
+      display: flex;
+      justify-content: center;
+      margin-right: 15%;
+      margin-left: 15%;
+      list-style: none
+    `;
 
   slider.append(indicator);
 
@@ -87,19 +55,19 @@ function sliders() {
     const dot = document.createElement("li");
     dot.setAttribute("data-slide-to", i + 1);
     dot.style.cssText = `
-      box-sizing: content-box;
-      flex: 0 1 auto;
-      width: 30px;
-      height: 6px;
-      margin: 0 3px;
-      cursor: pointer;
-      background-color: #fff;
-      background-clip: padding-box;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      opacity: .5;
-      transform: opacity .6s ease;
-    `;
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 6px;
+        margin: 0 3px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        opacity: .5;
+        transform: opacity .6s ease;
+      `;
     if (i == 0) {
       dot.style.opacity = 1;
     }

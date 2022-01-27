@@ -1,4 +1,4 @@
-function cards() {
+function clas() {
   // CLASS
   const getResource = async (url) => {
     const res = await fetch(url);
@@ -50,12 +50,18 @@ function cards() {
       this.parent.append(element);
     }
   }
-  // getResource(' http://localhost:3000/menu')
-  // .then(data => {
-  //   data.forEach((img, altimg, title, descr, price ) => {
-  //     new CarCard(img, altimg, title, descr, price, '.menu  .container').render()
-  //   })
-  // })
+  // getResource(" http://localhost:3000/menu").then((data) => {
+  //   data.forEach((img, altimg, title, descr, price) => {
+  //     new CarCard(
+  //       img,
+  //       altimg,
+  //       title,
+  //       descr,
+  //       price,
+  //       ".menu  .container"
+  //     ).render();
+  //   });
+  // });
 
   axios.get("http://localhost:3000/menu").then((data) => {
     data.forEach(({ img, altimg, title, descr, price }) => {
@@ -70,4 +76,4 @@ function cards() {
     });
   });
 }
-module.exports = cards;
+module.exports = clas;

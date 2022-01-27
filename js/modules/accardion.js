@@ -1,4 +1,4 @@
-function accordion() {
+function accardion() {
   // ACCORDION
 
   const accordion = document.querySelectorAll(".accordion");
@@ -15,4 +15,4 @@ function accordion() {
     });
   });
 }
-module.exports = accordion;
+module.exports = accardion;

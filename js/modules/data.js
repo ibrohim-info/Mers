@@ -46,7 +46,6 @@ function data() {
       }
     }
   }
-
   setClock(".timer", deadline);
 }
 module.exports = data;

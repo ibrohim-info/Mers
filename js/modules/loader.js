@@ -8,5 +8,4 @@ function loader() {
     }, 1500);
   }, 2000);
 }
-
 module.exports = loader;
