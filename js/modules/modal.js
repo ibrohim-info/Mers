@@ -1,43 +1,48 @@
-function modal() {
-  // MODAL
-  const allModalBtn = document.querySelectorAll("[data-modal]"),
-    modal = document.querySelector(".modal");
-
-  allModalBtn.forEach((btn) => {
-    btn.addEventListener("click", openModal);
-  });
-
-  function openModal() {
-    modal.classList.add("show");
-    modal.classList.remove("hide");
-    document.body.style.overflow = "hidden";
+function openModal(modalSelector, modalTimer) {
+  const modal = document.querySelector(modalSelector);
+  modal.classList.add("show");
+  modal.classList.remove("hide");
+  document.body.style.overflow = "hidden";
+  console.log(modalTimer);
+  if (modalTimer) {
     clearInterval(modalTimer);
   }
+}
 
-  function closeModal() {
-    modal.classList.add("hide");
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
+function closeModal(modalSelector) {
+  const modal = document.querySelector(modalSelector);
+  modal.classList.add("hide");
+  modal.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function modal(triggerSelector, modalSelector, modalTimer) {
+  const allModalBtn = document.querySelectorAll(triggerSelector),
+    modal = document.querySelector(modalSelector);
+
+  allModalBtn.forEach((btn) => {
+    btn.addEventListener("click", () => openModal(modalSelector, modalTimer));
+  });
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal || e.target.getAttribute("data-close") === "") {
-      closeModal();
+      closeModal(modalSelector);
     }
   });
-
-  const modalTimer = setTimeout(openModal, 5000);
 
   function showMyModalByScroll() {
     if (
       window.pageYOffset + document.documentElement.clientHeight >=
       document.documentElement.scrollHeight
     ) {
-      openModal();
+      openModal(modalSelector, modalTimer);
       window.removeEventListener("scroll", showMyModalByScroll);
     }
   }
 
   window.addEventListener("scroll", showMyModalByScroll);
 }
-module.exports = modal;
+export default modal;
+
+export { closeModal };
+export { openModal };

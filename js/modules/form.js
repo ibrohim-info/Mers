@@ -1,6 +1,6 @@
-function form() {
-  // FORM
+import { closeModal, openModal } from "./modal";
 
+function form(modalTimer) {
   const forms = document.querySelectorAll("form");
   const message = {
     loading: "img/form/spinner.svg",
@@ -56,7 +56,7 @@ function form() {
     const prevModalDialog = document.querySelector(".modal__dialog");
 
     prevModalDialog.classList.add("hide");
-    openModal();
+    openModal("./modal", modalTimer);
 
     const thanksModal = document.createElement("div");
     thanksModal.classList.add("modal__dialog");
@@ -71,8 +71,8 @@ function form() {
       thanksModal.remove();
       prevModalDialog.classList.add("show");
       prevModalDialog.classList.remove("hide");
-      closeModal();
+      closeModal("./modal", modalTimer);
     }, 4000);
   }
 }
-module.exports = form;
+export default form;

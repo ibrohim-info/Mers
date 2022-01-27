@@ -1,19 +1,21 @@
+import tabs from "./modules/tabs";
+import modal from "./modules/modal";
+import data from "./modules/data";
+import cards from "./modules/cards";
+import loader from "./modules/loader";
+import form from "./modules/form";
+import sliders from "./modules/sliders";
+import accardion from "./modules/accardion";
+import { openModal } from "./modules/modal";
 window.addEventListener("DOMContentLoaded", () => {
-  const tabs = require("./modules/tabs"),
-    modal = require("./modules/modal"),
-    data = require("./modules/data"),
-    cards = require("./modules/cards"),
-    loader = require("./modules/loader"),
-    form = require("./modules/form"),
-    sliders = require("./modules/sliders"),
-    accardion = require("./modules/accardion");
+  const modalTimer = setTimeout(() => openModal("./modal", modalTimer), 5000);
 
   tabs();
-  modal();
+  modal("[data-modal]", ".modal", modalTimer);
   data();
   cards();
   loader();
-  form();
+  form(modalTimer);
   sliders();
   accardion();
 });

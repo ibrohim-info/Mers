@@ -15,4 +15,4 @@ function accardion() {
     });
   });
 }
-module.exports = accardion;
+export default accardion;
